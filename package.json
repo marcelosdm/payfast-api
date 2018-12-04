@@ -1,0 +1,26 @@
+{
+  "name": "payfast",
+  "version": "1.0.0",
+  "description": "a payment gateway through http resources",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "gateway",
+    "payment",
+    "api"
+  ],
+  "author": "marcelosdm",
+  "license": "ISC",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
