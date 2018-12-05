@@ -31,11 +31,11 @@ module.exports = (app) => {
     paymentDAO.save(payment, (error, result) => {
       if (error) {
         console.log(`Failed to send to DB. ${error}`);
-        // res.status(500).send(error);
+        res.status(500).send(error);
       } else {
         console.log('Created payment');
 
-        // res.status(201).json(payment);
+        res.status(201).json(payment);
       }
     });
 
