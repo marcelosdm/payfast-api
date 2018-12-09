@@ -4,6 +4,38 @@ module.exports = (app) => {
     res.send('ok');
   });
 
+  app.delete('/payments/payment/:id', (req, res) => {
+    const payment = {};
+    const { id } = req.params.id;
+
+    payment.id = id;
+    payment.status = 'CANCELED';
+
+    const connection = app.parse.connectionFactory();
+    const paymentDAO = new app.parse.PaymentDAO(connection);
+
+    paymentDAO.delete(payment);
+  });
+
+  app.put('/payments/payment/:id', (req, res) => {
+    const payment = {};
+    const { id } = req.params.id;
+
+    payment.id = id;
+    payment.status = 'CONFIRMED';
+
+    const connection = app.parse.connectionFactory();
+    const paymentDAO = new app.parse.PaymentDAO(connection);
+
+    paymentDAO.update(payment, (error) => {
+      if (error) {
+        res.status(500).send(error);
+        return;
+      }
+      res.status(204).send(payment);
+    });
+  });
+
   app.post('/payments/payment', (req, res) => {
     req.assert('pay_method', 'Pay method is required').notEmpty();
     req
@@ -26,7 +58,7 @@ module.exports = (app) => {
     payment.date = new Date();
 
     const connection = app.parse.connectionFactory();
-    const paymentDAO = new app.pase.PaymentDAO(connection);
+    const paymentDAO = new app.parse.PaymentDAO(connection);
 
     paymentDAO.save(payment, (error, result) => {
       if (error) {
@@ -35,6 +67,7 @@ module.exports = (app) => {
       } else {
         console.log('Created payment');
 
+        res.location(`/payments/payment/${result.insertId}`);
         res.status(201).json(payment);
       }
     });
