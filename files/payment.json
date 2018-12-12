@@ -1,6 +1,15 @@
 {
-  "pay_method":"payfast",
-  "value":10.98,
-  "currency":"BRL",
-  "description":"criando um pagamento"
+  "payment":{
+    "pay_method":"payfast",
+    "value":10.98,
+    "currency":"BRL",
+    "description":"criando um pagamento"
+  },
+  "card":{
+    "number": 1234123412341234,
+    "banner":"visa",
+    "expiration_year":2020,
+    "expiration_month":12,
+    "cvv":123
+  }
 }
